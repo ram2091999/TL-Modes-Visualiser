@@ -4,6 +4,12 @@ import pickle
 import streamlit as st
 import sys
 import pandas as pd
+from TE import handleTE
+
+
+A = 10
+B = 5
+R = 5
 
 
 def main():
@@ -23,6 +29,9 @@ def main():
 
         for i, mode in enumerate(modes):
             modes[i] = st.sidebar.slider(mode, 0, 10, 0, 1)
+        
+        handleTE(st,modes,"Rectangular",A=A,B=B)
+
 
     elif st.sidebar.checkbox('Cylindrical waveguide'):
 
@@ -30,6 +39,7 @@ def main():
         
         for i, mode in enumerate(modes):
             modes[i] = st.sidebar.slider(mode, 0, 10, 0, 1)
+    
 
 
     st.sidebar.title('About the application')
