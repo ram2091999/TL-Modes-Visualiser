@@ -21,15 +21,15 @@ def main():
 
         modes = all_modes[:2]
 
-        for mode in modes:
-            modes[mode] = st.sidebar.slider(mode, 0, 10, 0, 1)
+        for i, mode in enumerate(modes):
+            modes[i] = st.sidebar.slider(mode, 0, 10, 0, 1)
 
     elif st.sidebar.checkbox('Cylindrical waveguide'):
 
         modes = all_modes[1:]
         
-        for mode in modes:
-            modes[mode] = st.sidebar.slider(mode, 0, 10, 0, 1)
+        for i, mode in enumerate(modes):
+            modes[i] = st.sidebar.slider(mode, 0, 10, 0, 1)
 
 
     st.sidebar.title('About the application')
