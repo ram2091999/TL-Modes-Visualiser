@@ -6,6 +6,7 @@ import sys
 import pandas as pd
 from TE import handleTE
 from TM import handleTM
+from TEM import handleTEM
 
 
 A = 10
@@ -24,6 +25,9 @@ def main():
 
     type_of_wave = st.sidebar.radio("Select Mode",['TE','TM','TEM'])
 
+    if type_of_wave == "TEM":
+        handleTEM(st)
+
     all_modes = ['m','n','p']
     
     st.sidebar.write("Select shape of waveguide")
@@ -40,7 +44,7 @@ def main():
         elif type_of_wave == "TM":
             handleTM(st,modes,"Rectangular",A=A,B=B)
         else:
-            pass
+            handleTEM(st)
           
 
 
@@ -56,7 +60,7 @@ def main():
         elif type_of_wave == "TM":
             handleTM(st,modes,"Cylindrical",R = R)
         else:
-            pass
+            handleTEM(st)
     
 
 
