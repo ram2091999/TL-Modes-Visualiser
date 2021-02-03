@@ -27,6 +27,7 @@ def main():
 
     if type_of_wave == "TEM":
         handleTEM(st)
+        return
 
     all_modes = ['m','n','p']
     
@@ -45,6 +46,7 @@ def main():
             handleTM(st,modes,"Rectangular",A=A,B=B)
         else:
             handleTEM(st)
+            return
           
 
 
@@ -61,6 +63,7 @@ def main():
             handleTM(st,modes,"Cylindrical",R = R)
         else:
             handleTEM(st)
+            return
     
 
 
