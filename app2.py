@@ -39,6 +39,8 @@ def main():
         
         for i, mode in enumerate(modes):
             modes[i] = st.sidebar.slider(mode, 0, 10, 0, 1)
+
+        handleTE(st,modes,"Cylindrical",R=R)
     
 
 
