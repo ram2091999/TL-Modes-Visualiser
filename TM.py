@@ -33,7 +33,7 @@ def handleTM(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
         plt.axis("scaled")
         col1.pyplot(fig)
         u = np.sin(M*PI/A*X)*np.cos(N*PI/B*Y)
-        v = np.cos(M*PI/A*X)*np.sin(N*PI/B*Y)
+        v = -1*np.cos(M*PI/A*X)*np.sin(N*PI/B*Y)
         fig, ax = plt.subplots()
         plt.streamplot(x,y,u,v,color="xkcd:azure")
         plt.axis("scaled")
@@ -54,7 +54,7 @@ def handleTM(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
             st.error("p cannot be 0!")
             return
         X = special.jn_zeros(N,P)
-        U = special.jvp(N,X[-1].round(3)/R*RAD)*np.cos(N*T)
+        U = -1*special.jvp(N,X[-1].round(3)/R*RAD)*np.cos(N*T)
         V = special.jv(N,X[-1].round(3)/R*RAD)*np.sin(N*T)
         col1, col2 = st.beta_columns(2)
         col1.header("E Field")
