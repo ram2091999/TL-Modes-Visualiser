@@ -12,8 +12,8 @@ class Circular_TE_TM_Functions():
         self.n = n
         self.p = p
         self.a = a
-        self.X_np = special.jn_zeros(n,p)
-        self.dX_np = special.jnp_zeros(n,p)
+        self.X_np = special.jn_zeros(n,p)[-1]
+        self.dX_np = special.jnp_zeros(n,p)[-1]
         self.f_TE = 2 * self.Fc_TE()
         self.f_TM = 2 * self.Fc_TM()
         self.w_TE = 2 * PI * self.f_TE

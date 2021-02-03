@@ -2,7 +2,8 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy import special
-
+from functions_rect import TEM_Functions
+import pandas as pd
 
 PI = math.pi
 A = 4
@@ -15,6 +16,7 @@ def handleTEM(st):
     T,RAD = np.meshgrid(t,r)
     U = 10/RAD
     V = T*0
+    par = TEM_Functions()
     col1, col2 = st.beta_columns(2)
     col1.header("E Field")
     col2.header("H Field")
@@ -30,4 +32,8 @@ def handleTEM(st):
     plt.streamplot(T,RAD,V,U,density=1)
     plt.axis("scaled")
     col2.pyplot(fig)
+    st.write(pd.DataFrame({
+           'Parameter': ["Kc", "Fc", "Beta-g", "Vg"],
+           'Value': [par.Kc(),par.Fc(), par.beta_g(),par.v_G()]
+       }))
 

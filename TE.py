@@ -1,7 +1,10 @@
 import math
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 from scipy import special
+from functions_rect import TE_TM_Functions
+from functions_circular import Circular_TE_TM_Functions
 
 
 PI = math.pi
@@ -11,11 +14,13 @@ PI = math.pi
 
 def handleTE(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
     if type_of_waveguide == "Rectangular":
+        
         x = np.linspace(0, A, 101)
         y = np.linspace(0, B, 101)
         X,Y = np.meshgrid(x, y)
         M = int(modes[0])
         N = int(modes[1])
+        par = TE_TM_Functions(M,N,A,B)
         if M==0 and N==0:
             st.error("m and n cannot be 0 at the same time")
             return
@@ -34,6 +39,10 @@ def handleTE(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
         plt.streamplot(x,y,u,v,color="xkcd:azure")
         plt.axis("scaled")
         col2.pyplot(fig)
+        st.write(pd.DataFrame({
+           'Parameter': ["Kc", "Fc", "Beta-g", "Vg","Zin","Zg","lambda-g"],
+           'Value': [par.Kc(),par.Fc(), par.beta_g(),par.v_G(),par.Z_in(),par.Z_G_TE(),par.lambda_G()]
+       }))
           
 
     else:
@@ -42,6 +51,7 @@ def handleTE(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
         T,RAD = np.meshgrid(t,r)
         N = int(modes[0])
         P = int(modes[1])
+        par = Circular_TE_TM_Functions(N,P,R)
         if P == 0:
             st.error("p cannot be 0!")
             return
@@ -65,3 +75,7 @@ def handleTE(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
         plt.streamplot(T,RAD,V,U)
         plt.axis("scaled")
         col2.pyplot(fig)
+        st.write(pd.DataFrame({
+           'Parameter': ["Kc", "Fc", "Beta-g", "Vg","Zin","Zg","lambda-g"],
+           'Value': [par.Kc_TE(),par.Fc_TE(), par.beta_g_TE(),par.v_G_TE(),par.Z_in(),par.Z_G_TE(),par.lambda_G_TE()]
+       }))

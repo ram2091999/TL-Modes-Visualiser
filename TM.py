@@ -1,7 +1,10 @@
 import math
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 from scipy import special
+from functions_rect import TE_TM_Functions
+from functions_circular import Circular_TE_TM_Functions
 
 
 PI = math.pi
@@ -16,6 +19,7 @@ def handleTM(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
         X,Y = np.meshgrid(x, y)
         M = int(modes[0])
         N = int(modes[1])
+        par = TE_TM_Functions(M,N,A,B)
         if M==0 and N==0:
             st.error("m and n cannot be 0 at the same time")
             return
@@ -34,6 +38,10 @@ def handleTM(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
         plt.streamplot(x,y,u,v,color="xkcd:azure")
         plt.axis("scaled")
         col2.pyplot(fig)
+        st.write(pd.DataFrame({
+           'Parameter': ["Kc", "Fc", "Beta-g", "Vg","Zin","Zg","lambda-g"],
+           'Value': [par.Kc(),par.Fc(), par.beta_g(),par.v_G(),par.Z_in(),par.Z_G_TM(),par.lambda_G()]
+       }))
           
 
     else:
@@ -51,7 +59,7 @@ def handleTM(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
         col1, col2 = st.beta_columns(2)
         col1.header("E Field")
         col2.header("H Field")
-
+        par = Circular_TE_TM_Functions(N,P,R)
         fig,ax = plt.subplots()
         plt.polar(2*PI,R)
         plt.streamplot(T,RAD,V,U)
@@ -66,3 +74,7 @@ def handleTM(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
         plt.streamplot(T,RAD,V,U)
         plt.axis("scaled")
         col2.pyplot(fig)
+        st.write(pd.DataFrame({
+           'Parameter': ["Kc", "Fc", "Beta-g", "Vg","Zin","Zg","lambda-g"],
+           'Value': [par.Kc_TM(),par.Fc_TM(), par.beta_g_TM(),par.v_G_TM(),par.Z_in(),par.Z_G_TM(),par.lambda_G_TM()]
+       }))
