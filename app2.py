@@ -5,6 +5,7 @@ import streamlit as st
 import sys
 import pandas as pd
 from TE import handleTE
+from TM import handleTM
 
 
 A = 10
@@ -21,7 +22,11 @@ def main():
     
     st.sidebar.title('Choose your preferences below')
 
+    type_of_wave = st.sidebar.radio("Select Mode",['TE','TM','TEM'])
+
     all_modes = ['m','n','p']
+    
+    st.sidebar.write("Select shape of waveguide")
 
     if st.sidebar.checkbox('Rectangular waveguide'):
 
@@ -29,8 +34,14 @@ def main():
 
         for i, mode in enumerate(modes):
             modes[i] = st.sidebar.slider(mode, 0, 10, 0, 1)
-        
-        handleTE(st,modes,"Rectangular",A=A,B=B)
+            
+        if type_of_wave == "TE":
+            handleTE(st,modes,"Rectangular",A=A,B=B)
+        elif type_of_wave == "TM":
+            handleTM(st,modes,"Rectangular",A=A,B=B)
+        else:
+            pass
+          
 
 
     elif st.sidebar.checkbox('Cylindrical waveguide'):
@@ -40,7 +51,12 @@ def main():
         for i, mode in enumerate(modes):
             modes[i] = st.sidebar.slider(mode, 0, 10, 0, 1)
 
-        handleTE(st,modes,"Cylindrical",R=R)
+        if type_of_wave == "TE":
+            handleTE(st,modes,"Cylindrical",R = R)
+        elif type_of_wave == "TM":
+            handleTM(st,modes,"Cylindrical",R = R)
+        else:
+            pass
     
 
 
