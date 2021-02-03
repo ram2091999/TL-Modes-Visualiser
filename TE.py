@@ -46,8 +46,9 @@ def handleTE(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
             st.error("p cannot be 0!")
             return
         X = special.jnp_zeros(N,P)
-        U = special.jv(N,X[-1]/R*RAD)*np.sin(N*T)
-        V = special.jvp(N,X[-1]/R*RAD)*np.cos(N*T)
+
+        U = special.jv(N,X[-1].round(3)/R*RAD)*np.sin(N*T)
+        V = special.jvp(N,X[-1].round(3)/R*RAD)*np.cos(N*T)
         col1, col2 = st.beta_columns(2)
         col1.header("E Field")
         col2.header("H Field")
@@ -57,8 +58,8 @@ def handleTE(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
         plt.streamplot(T,RAD,V,U)
         plt.axis("scaled")
         col1.pyplot(fig)
-        U = -1*special.jv(N,X[-1]/R*RAD)*np.cos(N*T)
-        V = special.jv(N,X[-1]/R*RAD)*np.sin(N*T)
+        U = -1*special.jv(N,X[-1].round(3)/R*RAD)*np.cos(N*T)
+        V = special.jv(N,X[-1].round(3)/R*RAD)*np.sin(N*T)
         fig,ax = plt.subplots()
         plt.polar(2*PI,R)
         plt.streamplot(T,RAD,V,U)
