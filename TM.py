@@ -9,9 +9,6 @@ from functions_circular import Circular_TE_TM_Functions
 
 PI = math.pi
 
-
-
-
 def handleTM(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
     if type_of_waveguide == "Rectangular":
         x = np.linspace(0, A, 101)
@@ -27,20 +24,21 @@ def handleTM(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
         v = np.sin(M*PI/A*X)*np.cos(N*PI/B*Y)
         fig, ax = plt.subplots()
         plt.streamplot(x,y,u,v,color="xkcd:azure")
-        col1, col2 = st.beta_columns(2)
-        col1.header("E Field")
-        col2.header("H Field")
         plt.axis("scaled")
-        col1.pyplot(fig)
+        st.subheader("E field")
+        st.pyplot(fig)
         u = np.sin(M*PI/A*X)*np.cos(N*PI/B*Y)
         v = -1*np.cos(M*PI/A*X)*np.sin(N*PI/B*Y)
         fig, ax = plt.subplots()
-        plt.streamplot(x,y,u,v,color="xkcd:azure")
+        plt.streamplot(x,y,u,v,color="red")
         plt.axis("scaled")
-        col2.pyplot(fig)
+        st.subheader("H field")
+        st.pyplot(fig)
+        st.subheader("Values")
         st.write(pd.DataFrame({
-           'Parameter': ["Kc", "Fc", "Beta-g", "Vg","Zin","Zg","lambda-g"],
-           'Value': [par.Kc(),par.Fc(), par.beta_g(),par.v_G(),par.Z_in(),par.Z_G_TM(),par.lambda_G()]
+           'Parameter': ["Kc", "Fc", "Beta-g", "Vg","Zin","Zg","lambda-g","lambda-C"],
+           'Value': [par.Kc(),par.Fc(), par.beta_g(),par.v_G(),par.Z_in(),par.Z_G_TM(),par.lambda_G(), par.lambda_C()],
+           'Unit':["1/m", "Hz", "1/m", "m/s", "Ohm", "Ohm", "m", "m"]
        }))
           
 
@@ -56,25 +54,25 @@ def handleTM(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
         X = special.jn_zeros(N,P)
         U = -1*special.jvp(N,X[-1].round(3)/R*RAD)*np.cos(N*T)
         V = special.jv(N,X[-1].round(3)/R*RAD)*np.sin(N*T)
-        col1, col2 = st.beta_columns(2)
-        col1.header("E Field")
-        col2.header("H Field")
         par = Circular_TE_TM_Functions(N,P,R)
         fig,ax = plt.subplots()
         plt.polar(2*PI,R)
-        plt.streamplot(T,RAD,V,U)
+        plt.streamplot(T,RAD,V,U,color="xkcd:azure")
         plt.axis("scaled")
-
-        col1.pyplot(fig)
+        st.subheader("E field")
+        st.pyplot(fig)
         U = special.jv(N,X[-1].round(3)/R*RAD)*np.sin(N*T)
         V = special.jvp(N,X[-1].round(3)/R*RAD)*np.cos(N*T)
 
         fig,ax = plt.subplots()
         plt.polar(2*PI,R)
-        plt.streamplot(T,RAD,V,U)
+        plt.streamplot(T,RAD,V,U,color="red")
         plt.axis("scaled")
-        col2.pyplot(fig)
+        st.subheader("H field")
+        st.pyplot(fig)
+        st.subheader("Values")
         st.write(pd.DataFrame({
-           'Parameter': ["Kc", "Fc", "Beta-g", "Vg","Zin","Zg","lambda-g"],
-           'Value': [par.Kc_TM(),par.Fc_TM(), par.beta_g_TM(),par.v_G_TM(),par.Z_in(),par.Z_G_TM(),par.lambda_G_TM()]
+           'Parameter': ["Kc", "Fc", "Beta-g", "Vg","Zin","Zg","lambda-g", "lambda-C"],
+           'Value': [par.Kc_TM(),par.Fc_TM(), par.beta_g_TM(),par.v_G_TM(),par.Z_in(),par.Z_G_TM(),par.lambda_G_TM(), par.lambda_C_TM()],
+           'Unit':["1/m", "Hz", "1/m", "m/s", "Ohm", "Ohm", "m", "m"]
        }))

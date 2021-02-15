@@ -17,23 +17,25 @@ def handleTEM(st):
     U = 10/RAD
     V = T*0
     par = TEM_Functions()
-    col1, col2 = st.beta_columns(2)
-    col1.header("E Field")
-    col2.header("H Field")
     fig,ax = plt.subplots()
     plt.polar(2*PI,B)
-    plt.streamplot(T,RAD,V,U)
+    plt.streamplot(T,RAD,V,U, color="xkcd:azure")
     plt.axis("scaled")
-    col1.pyplot(fig)
+    st.subheader("E field")
+    st.pyplot(fig)
     U = 0.000000001*RAD
     V=T*100
     fig,ax = plt.subplots()
     plt.polar(2*PI,B)
-    plt.streamplot(T,RAD,V,U,density=1)
+    plt.streamplot(T,RAD,V,U, color="red")
     plt.axis("scaled")
-    col2.pyplot(fig)
+    st.subheader("H field")
+    st.pyplot(fig)
+    st.subheader("Values")
     st.write(pd.DataFrame({
            'Parameter': ["Kc", "Fc", "Beta-g", "Vg"],
-           'Value': [par.Kc(),par.Fc(), par.beta_g(),par.v_G()]
+           'Value': [par.Kc(),par.Fc(), par.beta_g(),par.v_G()],
+           'Unit':["1/m", "Hz", "1/m", "m/s"]
+
        }))
 

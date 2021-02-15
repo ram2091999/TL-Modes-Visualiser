@@ -27,6 +27,10 @@ class Circular_TE_TM_Functions():
         val = ((1/(2 * PI * self.a * np.sqrt(mu_0 * epsilon_0))) * self.dX_np)
         return val
 
+    def lambda_C_TE(self):
+        val = (1/np.sqrt(mu_0 * epsilon_0)) / self.Fc_TE()
+        return val 
+
     def beta_g_TE(self):
         term1 = (self.w_TE**2) * mu_0 * epsilon_0
         term2 = np.power((self.dX_np / self.a), 2)
@@ -66,6 +70,10 @@ class Circular_TE_TM_Functions():
     def Fc_TM(self):
         val = ((1/(2 * PI * self.a * np.sqrt(mu_0 * epsilon_0))) * self.X_np)
         return val
+
+    def lambda_C_TM(self):
+        val = (1/np.sqrt(mu_0 * epsilon_0)) / self.Fc_TM()
+        return val    
 
     def lambda_G_TM(self):
         beta_G_val = self.beta_g_TM()
