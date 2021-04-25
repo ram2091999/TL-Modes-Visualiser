@@ -3,8 +3,8 @@
 # :india:  The Mode Visualiser :india: 
 
 
-| **[ [```Website```](<http://wg-visualiser.herokuapp.com/>) ]** | **[ [```Documentation```](<docs/Project.pdf>) ]** | **[ [```Microwave101```](<https://www.microwaves101.com/encyclopedias/national-institute-of-technology-trichy>) ]** |
-|:-------------------:|:-------------------:|:-------------------:|
+| **[ [```Website```](<http://wg-visualiser.herokuapp.com/>) ]** | **[ [```Documentation```](<docs/Project.pdf>) ]** | **[ [```Microwave101```](<https://www.microwaves101.com/encyclopedias/national-institute-of-technology-trichy>) ]** | **[ [```Microwaves @ Our Department```](<docs/Department.pdf>) ]** |
+|:-------------------:|:-------------------:|:-------------------:|:-------------------:|
 
 # Preview of our Visualisation
 
