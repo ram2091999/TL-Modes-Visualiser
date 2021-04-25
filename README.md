@@ -5,6 +5,9 @@
 
 | **[ [```Website```](<http://wg-visualiser.herokuapp.com/>) ]** | **[ [```Documentation```](<docs/Project.pdf>) ]** | **[ [```Microwave101```](<https://www.microwaves101.com/encyclopedias/national-institute-of-technology-trichy>) ]** | **[ [```Microwaves @ Our Department```](<docs/Department.pdf>) ]** |
 |:-------------------:|:-------------------:|:-------------------:|:-------------------:|
+
+In this project, we have developed of a web application made to visualise field lines of Electric and Magnetic waves inside a waveguide. After an extensive analysis to locate related works on the internet, we propose a first of the kind Graphical User Interface for waveguide visualisation, as a public resource. Here we provide the user with options to visualise upto *N* modes, which does not exist in any current literature due to field complexity. Additionally, all the parameters related to the selected mode, including the cut off frequency, cut off wave number will be calculated and displayed. 
+
 </div>
 
 # Preview of our Visualisation
