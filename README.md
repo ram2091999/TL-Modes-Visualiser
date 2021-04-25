@@ -41,5 +41,7 @@ In this project, we have developed of a web application made to visualise field 
 
 ```   
 <div align="center">
+  
 *“The true laboratory is the mind, where behind illusions we uncover the laws of truth.”* ― **Jagadish Chandra Bose**
+
 </div>
