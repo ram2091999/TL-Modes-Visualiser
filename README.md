@@ -40,3 +40,5 @@ In this project, we have developed of a web application made to visualise field 
 └── functions_rect.py                  
 
 ```   
+
+*“The true laboratory is the mind, where behind illusions we uncover the laws of truth.”* ― **Jagadish Chandra Bose**
