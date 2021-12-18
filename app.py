@@ -11,7 +11,7 @@ from TEM import handleTEM
 
 A = 2.2e-2
 B = 1.1e-2
-R = 2.3e-2
+R = 5
 
 
 def main():
