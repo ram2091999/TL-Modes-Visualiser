@@ -20,9 +20,9 @@ class TE_TM_Functions:
         return np.sqrt(val)
 
     def Fc(self):
-        val = (1 / (2 * np.sqrt(mu_0 * epsilon_0))) * np.power(
-            (self.m / self.a), 2
-        ) + np.power((self.n / self.b), 2)
+        val = (1 / (2 * np.sqrt(mu_0 * epsilon_0))) * np.sqrt(
+            np.power((self.m / self.a), 2) + np.power((self.n / self.b), 2)
+        )
         return val
 
     def beta_g(self):
