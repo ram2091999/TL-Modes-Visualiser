@@ -5,7 +5,7 @@ import pandas as pd
 from scipy import special
 from functions_rect import TE_TM_Functions
 from functions_circular import Circular_TE_TM_Functions
-
+from mpl_toolkits.axes_grid1.anchored_artists import AnchoredSizeBar
 
 PI = math.pi
 
@@ -26,13 +26,18 @@ def handleTM(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
         plt.streamplot(x,y,u,v,color="xkcd:azure")
         plt.axis("scaled")
         st.subheader("E field")
+        plt.xlim(0, A)
+        plt.ylim(0, B)
         st.pyplot(fig)
+        
         u = np.sin(M*PI/A*X)*np.cos(N*PI/B*Y)
         v = -1*np.cos(M*PI/A*X)*np.sin(N*PI/B*Y)
         fig, ax = plt.subplots()
         plt.streamplot(x,y,u,v,color="red")
         plt.axis("scaled")
         st.subheader("H field")
+        plt.xlim(0, A)
+        plt.ylim(0, B)
         st.pyplot(fig)
         st.subheader("Values")
         st.write(pd.DataFrame({
@@ -54,22 +59,27 @@ def handleTM(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
         X = special.jn_zeros(N,P)
         U = -1*special.jvp(N,X[-1].round(3)/R*RAD)*np.cos(N*T)
         V = special.jv(N,X[-1].round(3)/R*RAD)*np.sin(N*T)
-        par = Circular_TE_TM_Functions(N,P,R)
-        fig,ax = plt.subplots()
+        par = Circular_TE_TM_Functions(N,P,2.3e-2)
+        fig,ax = plt.subplots(subplot_kw={'projection': 'polar'})
+        
         plt.polar(2*PI,R)
         plt.streamplot(T,RAD,V,U,color="xkcd:azure")
         plt.axis("scaled")
         st.subheader("E field")
         st.pyplot(fig)
+        st.markdown("**Scale: 5units = 2.3 cm**")
+        ax.set_rmax(R)
         U = special.jv(N,X[-1].round(3)/R*RAD)*np.sin(N*T)
         V = special.jvp(N,X[-1].round(3)/R*RAD)*np.cos(N*T)
 
-        fig,ax = plt.subplots()
+        fig,ax = plt.subplots(subplot_kw={'projection': 'polar'})
         plt.polar(2*PI,R)
         plt.streamplot(T,RAD,V,U,color="red")
         plt.axis("scaled")
         st.subheader("H field")
         st.pyplot(fig)
+        st.markdown("**Scale: 5units = 2.3 cm**")
+        ax.set_rmax(R)
         st.subheader("Values")
         st.write(pd.DataFrame({
            'Parameter': ["Kc", "Fc", "Beta-g", "Vg","Zin","Zg","lambda-g"],

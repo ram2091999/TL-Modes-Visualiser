@@ -9,8 +9,8 @@ from TM import handleTM
 from TEM import handleTEM
 
 
-A = 10
-B = 5
+A = 2.2e-2
+B = 1.1e-2
 R = 5
 
 
