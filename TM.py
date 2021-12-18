@@ -23,7 +23,6 @@ def handleTM(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
         u = np.cos(M*PI/A*X)*np.sin(N*PI/B*Y)
         v = np.sin(M*PI/A*X)*np.cos(N*PI/B*Y)
         fig, ax = plt.subplots()
-        plt.polar(2*PI,R)
         plt.streamplot(x,y,u,v,color="xkcd:azure")
         plt.axis("scaled")
         st.subheader("E field")
