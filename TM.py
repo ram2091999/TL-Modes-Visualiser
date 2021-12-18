@@ -61,7 +61,7 @@ def handleTM(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
         U = -1*special.jvp(N,X[-1].round(3)/R*RAD)*np.cos(N*T)
         V = special.jv(N,X[-1].round(3)/R*RAD)*np.sin(N*T)
         par = Circular_TE_TM_Functions(N,P,2.3e-2)
-        fig,ax = plt.subplots(subplot_kw={'projection': 'polar'})
+        fig,ax = plt.subplots()
         
         plt.polar(2*PI,R)
         plt.streamplot(T,RAD,V,U,color="xkcd:azure")
@@ -69,18 +69,18 @@ def handleTM(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
         st.subheader("E field")
         st.pyplot(fig)
         st.markdown("**Scale: 5units = 2.3 cm**")
-        ax.set_rmax(R)
+        
         U = special.jv(N,X[-1].round(3)/R*RAD)*np.sin(N*T)
         V = special.jvp(N,X[-1].round(3)/R*RAD)*np.cos(N*T)
 
-        fig,ax = plt.subplots(subplot_kw={'projection': 'polar'})
+        fig,ax = plt.subplots()
         plt.polar(2*PI,R)
         plt.streamplot(T,RAD,V,U,color="red")
         plt.axis("scaled")
         st.subheader("H field")
         st.pyplot(fig)
         st.markdown("**Scale: 5units = 2.3 cm**")
-        ax.set_rmax(R)
+        
         st.subheader("Values")
         st.write(pd.DataFrame({
            'Parameter': ["Kc", "Fc", "Beta-g", "Vg","Zin","Zg","lambda-g"],
