@@ -6,7 +6,7 @@ from scipy.constants import *
 
 PI = math.pi
 
-# Functions to be included - 
+# Functions to be included -
 # Rectangular
 # 1. Kc
 # 2. Fc
@@ -25,67 +25,68 @@ PI = math.pi
 # 6. Lambda_G
 # 7. Xnp table
 
-class TE_TM_Functions():
-    
+
+class TE_TM_Functions:
     def Kc(self, m, n, a, b):
-        val = np.power((m*PI/a), 2) + np.power((n*PI/b), 2)
+        val = np.power((m * PI / a), 2) + np.power((n * PI / b), 2)
         return np.sqrt(val)
 
-    def Fc(self, m, n ,a ,b):
-        val = (1/np.sqrt(mu_0 * epsilon_0)) * np.power((m/a), 2) + np.power((n/b), 2)
+    def Fc(self, m, n, a, b):
+        val = (1 / np.sqrt(mu_0 * epsilon_0)) * np.power((m / a), 2) + np.power(
+            (n / b), 2
+        )
         return val
 
     def beta_g(self, w, f, m, n, a, b):
-        fc_val = self.Fc(m, n, a, b) 
-        val = w * np.sqrt(mu_0 * epsilon_0) * np.sqrt(1 - np.power((fc_val/f), 2))   
+        fc_val = self.Fc(m, n, a, b)
+        val = w * np.sqrt(mu_0 * epsilon_0) * np.sqrt(1 - np.power((fc_val / f), 2))
         return val
 
     def v_G(self, w, f, m, n, a, b):
         beta_G_val = self.beta_g(w, f, m, n, a, b)
-        val = w/beta_G_val
+        val = w / beta_G_val
         return val
 
     def Z_in(self):
-        val = np.sqrt(mu_0/epsilon_0) 
+        val = np.sqrt(mu_0 / epsilon_0)
         return val
 
     def Z_G_TE(self, f, m, n, a, b):
         fc_val = self.Fc(m, n, a, b)
         Z_in = self.Z_in()
-        val = Z_in/(np.sqrt(1-np.power((fc_val/f), 2)))
+        val = Z_in / (np.sqrt(1 - np.power((fc_val / f), 2)))
         return val
 
     def lambda_G(self, w, f, m, n, a, b):
         beta_G_val = self.beta_g(w, f, m, n, a, b)
-        val = 2 * PI/beta_G_val
-        return val    
+        val = 2 * PI / beta_G_val
+        return val
 
     def Z_G_TM(self, f, m, n, a, b):
         fc_val = self.Fc(m, n, a, b)
         Z_in = self.Z_in()
-        val = Z_in * (np.sqrt(1-np.power((fc_val/f), 2)))
+        val = Z_in * (np.sqrt(1 - np.power((fc_val / f), 2)))
         return val
 
 
-class TEM_Functions():
-
+class TEM_Functions:
     def Kc(self):
         val = 0
         return val
 
     def Fc(self):
         val = 0
-        return val 
+        return val
 
     def Z_in(self):
-        val = np.sqrt(mu_0/epsilon_0) 
+        val = np.sqrt(mu_0 / epsilon_0)
         return val
 
     def beta_g(self, w):
-        val = w * np.sqrt(mu_0 * epsilon_0)  
+        val = w * np.sqrt(mu_0 * epsilon_0)
         return val
 
     def v_G(self, w):
         beta_g_val = self.beta_g(w)
-        val = w/beta_g_val 
+        val = w / beta_g_val
         return val

@@ -19,54 +19,53 @@ def main():
     st.set_page_config(page_title="Waveguide Visualiser", page_icon=None)
 
     st.title("Waveguide Modes Visualiser")
-    st.subheader("An application to visualise E and H fields inside a waveguide for different modes")
-    
-    st.sidebar.title('Choose your preferences below')
+    st.subheader(
+        "An application to visualise E and H fields inside a waveguide for different modes"
+    )
 
-    type_of_wave = st.sidebar.radio("Select Mode",['TE','TM','TEM'])
+    st.sidebar.title("Choose your preferences below")
+
+    type_of_wave = st.sidebar.radio("Select Mode", ["TE", "TM", "TEM"])
 
     if type_of_wave == "TEM":
         handleTEM(st)
         return
 
-    all_modes = ['m','n','p']
-    
+    all_modes = ["m", "n", "p"]
+
     st.sidebar.write("Select shape of waveguide")
 
-    if st.sidebar.checkbox('Rectangular waveguide'):
+    if st.sidebar.checkbox("Rectangular waveguide"):
 
         modes = all_modes[:2]
 
         for i, mode in enumerate(modes):
             modes[i] = st.sidebar.slider(mode, 0, 10, 0, 1)
-            
+
         if type_of_wave == "TE":
-            handleTE(st,modes,"Rectangular",A=A,B=B)
+            handleTE(st, modes, "Rectangular", A=A, B=B)
         elif type_of_wave == "TM":
-            handleTM(st,modes,"Rectangular",A=A,B=B)
+            handleTM(st, modes, "Rectangular", A=A, B=B)
         else:
             handleTEM(st)
             return
-          
 
-
-    elif st.sidebar.checkbox('Cylindrical waveguide'):
+    elif st.sidebar.checkbox("Cylindrical waveguide"):
 
         modes = all_modes[1:]
-        
+
         for i, mode in enumerate(modes):
             modes[i] = st.sidebar.slider(mode, 0, 10, 0, 1)
 
         if type_of_wave == "TE":
-            handleTE(st,modes,"Cylindrical",R = R)
+            handleTE(st, modes, "Cylindrical", R=R)
         elif type_of_wave == "TM":
-            handleTM(st,modes,"Cylindrical",R = R)
+            handleTM(st, modes, "Cylindrical", R=R)
         else:
             handleTEM(st)
             return
-    
 
-    st.sidebar.title('About the application')
+    st.sidebar.title("About the application")
     st.sidebar.write(
         """This is an interactive web application on pictorial
          representation on EM modes in rectangular and circular waveguides
