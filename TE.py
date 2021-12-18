@@ -27,6 +27,9 @@ def handleTE(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
         plt.streamplot(X,Y,u,v,color="xkcd:azure")
         plt.axis("scaled")
         st.subheader("E field")
+        plt.xlim(0, A)
+        plt.ylim(0, B)
+        
         st.pyplot(fig)
         u = np.sin(M*PI/A*X)*np.cos(N*PI/B*Y)
         v = np.cos(M*PI/A*X)*np.sin(N*PI/B*Y)
@@ -34,6 +37,9 @@ def handleTE(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
         plt.streamplot(x,y,u,v,color="red")
         plt.axis("scaled")
         st.subheader("H field")
+        plt.xlim(0, A)
+        plt.ylim(0, B)
+        
         st.pyplot(fig)
         st.subheader("Values")
         st.write(pd.DataFrame({
@@ -63,6 +69,7 @@ def handleTE(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
         plt.streamplot(T,RAD,V,U, color="xkcd:azure")
         plt.axis("scaled")
         st.subheader("E field")
+        ax.set_rmax(R)
         st.pyplot(fig)
         U = -1 * special.jv(N,X[-1].round(3)/R*RAD)*np.cos(N*T)
         V = special.jv(N,X[-1].round(3)/R*RAD)*np.sin(N*T)
@@ -71,6 +78,7 @@ def handleTE(st,modes=[0,0],type_of_waveguide="Rectangular",A=10,B=5,R=5):
         plt.streamplot(T,RAD,V,U, color="red")
         plt.axis("scaled")
         st.subheader("H field")
+        ax.set_rmax(R)
         st.pyplot(fig)
         st.subheader("Values")
         st.write(pd.DataFrame({
